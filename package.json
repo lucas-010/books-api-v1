@@ -1,0 +1,10 @@
+{
+  "name": "books-api-v1",
+  "version": "1.0.0",
+  "description": "API para CRUD de livros com autores e usuários",
+  "main": "dist/index.js",
+  "repository": "https://github.com/lucas-010/books-api-v1.git",
+  "author": "Lucas Pereira Ramos <lucaspereiradf07@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
