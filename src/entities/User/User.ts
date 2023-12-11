@@ -1,4 +1,5 @@
 import IUser from "./IUser";
+import { v4 as uuid } from "uuid";
 
 class User implements IUser {
 	private _id: string;
@@ -7,7 +8,7 @@ class User implements IUser {
 	private _password: string;
 
 	constructor(name: string, email: string, password: string) {
-		this._id = "aa";
+		this._id = uuid();
 		this._name = name;
 		this._email = email;
 		this._password = password;
