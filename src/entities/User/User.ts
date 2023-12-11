@@ -7,8 +7,13 @@ class User implements IUser {
 	private _email: string;
 	private _password: string;
 
-	constructor(name: string, email: string, password: string) {
-		this._id = uuid();
+	constructor(
+		name: string,
+		email: string,
+		password: string,
+		id: string = uuid(),
+	) {
+		this._id = id;
 		this._name = name;
 		this._email = email;
 		this._password = password;
