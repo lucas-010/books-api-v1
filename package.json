@@ -30,7 +30,9 @@
     "build": "tsc",
     "dev": "ts-node src/index.ts",
     "start": "node dist/index.ts",
-    "test": "jest"
+    "test": "jest",
+		"migrate:dev": "knex --knexfile ./src/database/config/environments/development.ts migrate:latest",
+		"migrate:production": "knex --knexfile ./src/database/config/environments/production.ts migrate:latest"
   },
   "dependencies": {
     "dotenv": "^16.3.1",
