@@ -12,6 +12,15 @@ class UserRepository extends BaseRepository<User> {
 			.where("email", email)
 			.first();
 	}
+
+	mapToDatabaseObject(item: User): Record<string, any> {
+		return {
+			id: item.id,
+			name: item.name,
+			email: item.email,
+			password: item.password,
+		};
+	}
 }
 
 export default UserRepository;
