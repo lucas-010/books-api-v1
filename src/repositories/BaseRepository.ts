@@ -10,6 +10,8 @@ abstract class BaseRepository<T> {
 		this.database = database;
 	}
 
+	abstract mapToDatabaseObject(item: T): Record<string, any>;
+
 	async selectAll(page: number = 1, limit: number = 10): Promise<T[]> {
 		const offset = (page - 1) & limit;
 		return await this.database(this.tableName)
@@ -23,8 +25,10 @@ abstract class BaseRepository<T> {
 	}
 
 	async insert(item: T): Promise<string> {
-		return (await this.database(this.tableName).insert(item).returning("id"))[0]
-			.id;
+		const mappedItem = this.mapToDatabaseObject(item);
+		return (
+			await this.database(this.tableName).insert(mappedItem).returning("id")
+		)[0].id;
 	}
 
 	async delete(id: string): Promise<boolean> {
