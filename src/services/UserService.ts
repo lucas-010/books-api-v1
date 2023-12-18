@@ -1,6 +1,7 @@
 import IUser from "../entities/User/IUser";
 import User from "../entities/User/User";
 import UserRepository from "../repositories/UserRepository";
+import hashPassword from "../utils/hashPassword";
 import BaseService from "./BaseService";
 
 class UserService extends BaseService<User, UserRepository> {
@@ -9,7 +10,8 @@ class UserService extends BaseService<User, UserRepository> {
 	}
 
 	async create(item: Omit<IUser, "id">): Promise<string> {
-		const user = new User(item.name, item.email, item.password);
+		const hashedPassword = await hashPassword(item.password);
+		const user = new User(item.name, item.email, hashedPassword);
 		return await this.repository.insert(user);
 	}
 
