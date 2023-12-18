@@ -5,13 +5,13 @@ export const up = async (knex: Knex) => {
 		.createTable("book", (table) => {
 			table.uuid("id").primary().index();
 			table.string("title").notNullable().index().checkLength(">=", 2);
-			table.integer("pages").notNullable().checkLength(">=", 1);
+			table.integer("pages").unsigned().notNullable();
 			table.string("imgUrl", 255);
 			table.text("description").notNullable().checkLength(">=", 10);
 			table.uuid("author_id").unsigned();
 			table.foreign("author_id").references("author.id");
 		})
-		.then(() => {
+		.then(async () => {
 			console.log("# Created table book");
 		});
 };
