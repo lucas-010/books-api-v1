@@ -8,13 +8,26 @@ import validationAuthor from "../validations/validationAuthor";
 import validate from "../middlewares/validate";
 import validationId from "../validations/validationId";
 import validationPaginationOptions from "../validations/validationPaginationOptions";
+import authenticateJwt from "../middlewares/authenticateJwt";
 
 const authorRouter = Router();
 
-authorRouter.post("/", validationAuthor, validate, createAuthor);
+authorRouter.post(
+	"/",
+	authenticateJwt,
+	validationAuthor,
+	validate,
+	createAuthor,
+);
 authorRouter.get("/:id", validationId, validate, getByIdAuthor);
 authorRouter.get("/", validationPaginationOptions, validate, getAllAuthor);
-authorRouter.put("/:id", validationId, validate, updateAuthor);
-authorRouter.delete("/:id", validationId, validate, deleteAuthor);
+authorRouter.put("/:id", authenticateJwt, validationId, validate, updateAuthor);
+authorRouter.delete(
+	"/:id",
+	authenticateJwt,
+	validationId,
+	validate,
+	deleteAuthor,
+);
 
 export default authorRouter;
